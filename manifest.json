@@ -1,0 +1,36 @@
+{
+  "name": "Getting Started Example",
+  "version": "1.0",
+  "description": "Build an Extension!",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "https://www.gstatic.com/charts/loader.js"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.gstatic.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.kinvo.com.br/meus-produtos"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}
