@@ -4,15 +4,54 @@
   <meta charset="UTF-8">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="popup.js"></script>
+
+  <style>
+    body {
+      color: rgb(76, 48, 155);
+    }
+
+    hr {
+      height: 1px;
+      margin-bottom: 10px;
+      margin-top: 10px;
+      background-color: rgb(76, 48, 155);
+      border-bottom-width: 0px;
+      border-top-width: 0px;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background-color: rgb(245, 245, 245);
+      border-radius: 4px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: rgb(76, 48, 155);
+      border-radius: 4px;
+    }
+  </style>
 </head>
 
 <body>
   <div id="piechart" style="width: 600px; height: 353px;"></div>
-  <p><strong>Ultima atualização: </strong><span id="last-update"></span></p>
-  <a href="#" id="update-chart">Atualizar</a>
+  <p>
+    <strong>Ultima atualização: </strong><span id="last-update"></span><br>
+    <a href="#" id="update-chart">Atualizar</a>
+  </p>
+
+  <hr>
+
   <div id="barchart" style="width: 600px; height: 353px;"></div>
-  <p><strong>Ultima atualização: </strong><span id="last-update-bar"></span></p>
-  <a href="#" id="update-chart-bar">Atualizar</a>
+  <p>
+    <strong>Ultima atualização: </strong><span id="last-update-bar"></span><br>
+    <a href="#" id="update-chart-bar">Atualizar</a>
+  </p>
 </body>
 
 </html>

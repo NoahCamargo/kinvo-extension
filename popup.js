@@ -1,3 +1,5 @@
+var color = 'rgb(76, 48, 155)';
+
 function drawChart() {
   chrome.storage.sync.get(['distributionProducts', 'lastUpdate'], (storage) => {
     distribution_products = storage.distributionProducts
@@ -10,6 +12,7 @@ function drawChart() {
 
     var options = {
       title: 'Distribuição dos produtos',
+      titleTextStyle: { color: color, bold: true, fontSize: 16, fontName: 'Roboto' },
       pieHole: 0.4,
       chartArea: { top: 40, width: '100%', height: '88.5%' }
     };
@@ -52,6 +55,7 @@ function drawStuff() {
         title: `Dividendos - Total (${Math.round(total * 100) / 100})`,
         subtitle: 'Últimos meses'
       },
+      titleTextStyle: { color: color, bold: true },
     };
 
     var chart = new google.charts.Bar(document.getElementById('barchart'));
