@@ -8,8 +8,7 @@ function distributionProducts() {
 
   products.forEach((node) => {
     value = node.querySelectorAll('a div div h4')
-    value = value[0].textContent
-    value = value.replace("R$ ", "").replace(".", "").replace(",", ".")
+    value = parseCurrency(value[0].textContent)
     value = parseFloat(value)
 
     distribution_product = distribution_products[node.className]

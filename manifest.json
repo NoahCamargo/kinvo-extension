@@ -29,7 +29,18 @@
       ],
       "run_at": "document_end",
       "js": [
-        "content.js"
+        "scripts/helpers.js",
+        "scripts/distribution_products.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.kinvo.com.br/resumo-da-carteira"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/helpers.js",
+        "scripts/dividends.js"
       ]
     }
   ]
