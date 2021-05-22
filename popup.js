@@ -1,4 +1,4 @@
-var color = 'rgb(76, 48, 155)';
+var color = 'rgb(76, 48, 155)'
 
 function drawChart() {
   chrome.storage.sync.get(['distributionProducts', 'lastUpdate'], (storage) => {
@@ -6,15 +6,19 @@ function drawChart() {
 
     console.log("distribution received")
 
+    colors = getColors(distribution_products)
     distribution_products = Object.values(distribution_products).map((data) => [data.example, data.value])
+
     console.log(distribution_products)
+
     var data = google.visualization.arrayToDataTable([['Tipo', 'Valor total']].concat(distribution_products));
 
     var options = {
       title: 'Distribuição dos produtos',
       titleTextStyle: { color: color, bold: true, fontSize: 16, fontName: 'Roboto' },
       pieHole: 0.4,
-      chartArea: { top: 40, width: '100%', height: '88.5%' }
+      chartArea: { top: 40, width: '100%', height: '88.5%' },
+      slices: colors
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -22,6 +26,13 @@ function drawChart() {
     chart.draw(data, options);
     document.getElementById('last-update').textContent = storage.lastUpdate
   });
+}
+
+function getColors(distribution_products) {
+  colors = Object.values(distribution_products).map((obj, i) => [i, { color: obj.color }])
+  colors = colors.filter((data) => data[1].color)
+
+  return Object.fromEntries(colors)
 }
 
 function groupBy(list, get_key) {
@@ -51,6 +62,7 @@ function drawStuff() {
 
     var options = {
       legend: { position: 'none' },
+      colors: [color],
       chart: {
         title: `Dividendos - Total (${Math.round(total * 100) / 100})`,
         subtitle: 'Últimos meses'
@@ -66,10 +78,10 @@ function drawStuff() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  google.charts.load('current', { 'packages': ['corechart'] });
+  google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawChart);
 
-  google.charts.load('current', { 'packages': ['bar'] });
+  google.charts.load('current', { packages: ['corechart', 'bar'] });
   google.charts.setOnLoadCallback(drawStuff);
 
   document.getElementById("update-chart").addEventListener("click", () => {

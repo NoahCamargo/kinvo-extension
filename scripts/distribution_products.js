@@ -1,7 +1,3 @@
-function getRoot() {
-  return document.querySelector('input[placeholder="Busque por um produto"]')
-}
-
 function distributionProducts() {
   distribution_products = {}
   products = getRoot().parentElement.querySelectorAll('div div div div section')
@@ -9,15 +5,34 @@ function distributionProducts() {
   products.forEach((node) => {
     value = node.querySelectorAll('a div div h4')
     value = parseCurrency(value[0].textContent)
-    value = parseFloat(value)
 
-    distribution_product = distribution_products[node.className]
-
-    distribution_products[node.className] = {
-      example: node.querySelector('a div div h5').textContent,
-      value: (distribution_product ? distribution_product.value : 0.0) + value
+    if (value > 0) {
+      distribution_products = buildDistributionProduct(distribution_products, node, value)
     }
   })
+
+  return distribution_products
+}
+
+function getRoot() {
+  return document.querySelector('input[placeholder="Busque por um produto"]')
+}
+
+function buildDistributionProduct(distribution_products, node, value) {
+  distribution_product = distribution_products[node.className]
+
+  example = class_dict[node.className]
+  example = example ? example : node.querySelector('a div div h5').textContent
+
+  distribution_products[node.className] = {
+    example: example,
+    value: (distribution_product ? distribution_product.value : 0.0) + value
+  }
+
+  if (!distribution_products[node.className].color) {
+    color = window.getComputedStyle(node, ':before').backgroundColor
+    distribution_products[node.className]["color"] = color
+  }
 
   return distribution_products
 }
